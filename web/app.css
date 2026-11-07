@@ -140,4 +140,3 @@ button:disabled { opacity: .6; cursor: wait; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
-

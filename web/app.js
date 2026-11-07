@@ -42,4 +42,3 @@ function appStart() {
 
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", appStart, {once: true});
 else appStart();
-
