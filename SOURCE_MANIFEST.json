@@ -125,6 +125,7 @@
   ],
   "exe_sha256": "d818532164c9cefa911464456683c8221585db46cbfaf8927a430eb1a8632875",
   "files": {
+    ".gitattributes": "aa5e08e3962267a84b49cc8e3fae48de59698a0b8a8ffaced598d330c463fa1c",
     ".github/workflows/ci.yml": "a370c6a1898d19497c720dad8ec2d32b1eff2ed3529b58acb16a44ffdec6257d",
     ".gitignore": "4aa22578073d6f3c185a08d286cd63c7892924c9e4a7a0569381ad2818806d25",
     "cmd/ledger/main.go": "fbe30d652c2d78bf637a60c9de8654feb14a9b76d915ec716b5e059ea2c2285c",
