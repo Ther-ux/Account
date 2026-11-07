@@ -96,6 +96,7 @@ button:disabled { opacity: .6; cursor: wait; }
 .stats-expense-card { background: #fcf7f3; border-color: #eee3d9; }
 .stats-expense, .stats-balance[data-sign="negative"] { color: #9b4633; }
 .stats-summary[data-stale="true"] { border-left: 3px solid var(--app-danger); padding-left: 12px; }
+.stats-summary[data-loading="true"] { opacity: .65; }
 .stats-range { color: var(--app-muted); font-size: 12px; overflow-wrap: anywhere; margin: 13px 0 0; }
 .stats-retry { margin-top: 12px; }
 @media (max-width: 1024px) {

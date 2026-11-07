@@ -21,7 +21,7 @@ async function appStartFeature(feature) {
   try {
     const module = await feature.load();
     if (typeof module[feature.init] !== "function") throw new Error("Missing feature initializer: " + feature.init);
-    module[feature.init](container);
+    await module[feature.init](container);
   } catch (error) {
     const message = document.createElement("p");
     message.className = "app-module-error";
