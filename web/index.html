@@ -3,33 +3,46 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
   <title>个人记账本</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/app.css">
+  <script type="module" src="/app.js"></script>
 </head>
 <body>
-  <header>
-    <h1>个人记账本</h1>
-    <p>项目骨架已启动，各功能由组员接入。</p>
-    <nav aria-label="记账本功能">
-      <ul>
-        <li><a href="#record">记一笔</a></li>
-        <li><a href="#recent">最近记录</a></li>
-        <li><a href="#stats">收支统计</a></li>
-      </ul>
-    </nav>
+  <a class="app-skip-link" href="#main-content">跳到主要内容</a>
+  <header class="app-header">
+    <div class="app-header-inner">
+      <a class="app-brand" href="#main-content"><span class="app-brand-mark" aria-hidden="true">账</span>
+        <span>个人记账本<small>把每一笔，记清楚</small></span></a>
+      <nav class="app-nav" aria-label="记账本功能">
+        <a href="#record" aria-current="location">记一笔</a>
+        <a href="#recent">最近记录</a>
+        <a href="#stats">收支统计</a>
+      </nav>
+    </div>
   </header>
-  <main>
-    <section id="record" aria-labelledby="record-title">
-      <h2 id="record-title">记一笔</h2>
-      <div id="record-panel"><p>待接入记账表单。</p></div>
+  <main id="main-content" class="app-main" tabindex="-1">
+    <div class="app-intro"><p class="app-eyebrow">MY LEDGER</p>
+      <h1>日常收支，一目了然。</h1><p>记下收入与支出，随时查看每一笔。</p></div>
+    <div class="app-workspace">
+      <section id="record" class="app-section" aria-labelledby="record-title" tabindex="-1">
+        <div class="app-section-heading"><h2 id="record-title">记一笔</h2><span>从今天开始，认真记录</span></div>
+        <div id="record-panel"><p class="app-loading" role="status">正在准备记账表单…</p></div>
+      </section>
+      <section id="recent" class="app-section" aria-labelledby="recent-title" tabindex="-1">
+        <div class="app-section-heading"><h2 id="recent-title">最近记录</h2><span>最新录入在前</span></div>
+        <div id="recent-panel"><p class="app-loading" role="status">正在读取最近记录…</p></div>
+      </section>
+    </div>
+    <section id="stats" class="app-section app-statistics" aria-labelledby="stats-title" tabindex="-1">
+      <div class="app-section-heading"><div><h2 id="stats-title">收支统计</h2>
+        <p>按日期、类别和金额，查看你关心的收支。</p></div><span>金额以元显示</span></div>
+      <div id="stats-panel"><p class="app-loading" role="status">正在获取统计结果…</p></div>
     </section>
-    <section id="recent" aria-labelledby="recent-title">
-      <h2 id="recent-title">最近记录</h2>
-      <div id="recent-panel"><p>待接入最近记录列表。</p></div>
-    </section>
-    <section id="stats" aria-labelledby="stats-title">
-      <h2 id="stats-title">收支统计</h2>
-      <div id="stats-panel"><p>待接入统计筛选与结果。</p></div>
-    </section>
+    <noscript><p class="app-module-error">请启用浏览器 JavaScript 后使用记账功能。</p></noscript>
   </main>
+  <footer class="app-footer">个人记账本 · 收支记录与统计</footer>
 </body>
 </html>
+

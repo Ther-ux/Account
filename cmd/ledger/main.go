@@ -2,10 +2,12 @@ package main
 
 import (
 	"flag"
-	"io"
 	"log"
 	"net/http"
 	"time"
+
+	"personal-ledger/internal/httpapi"
+	"personal-ledger/internal/store"
 )
 
 func main() {
@@ -23,14 +25,10 @@ func main() {
 
 func newHandler(webDir string) http.Handler {
 	api := http.NewServeMux()
-	pending := func(w http.ResponseWriter, _ *http.Request) {
-		w.Header().Set("Content-Type", "application/json; charset=utf-8")
-		w.WriteHeader(http.StatusNotImplemented)
-		io.WriteString(w, `{"error":"接口待实现"}`)
-	}
-	api.HandleFunc("POST /api/records", pending)
-	api.HandleFunc("GET /api/records/recent", pending)
-	api.HandleFunc("GET /api/stats", pending)
+	records := store.NewJSONStore("data/records.json")
+	api.HandleFunc("POST /api/records", httpapi.Create(records.Append))
+	api.HandleFunc("GET /api/records/recent", httpapi.Recent(records.List))
+	api.HandleFunc("GET /api/stats", httpapi.Stats(records.List))
 
 	mux := http.NewServeMux()
 	mux.Handle("/api/", api)
