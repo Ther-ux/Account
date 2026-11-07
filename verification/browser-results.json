@@ -1,0 +1,34 @@
+{
+  "checks": 20,
+  "passed": [
+    "first screen shows only daily entry and preview; defaults and advanced fields are uncomplicated",
+    "amount-only entry saves with today's date and default category in one click",
+    "large category controls, income switch, optional note and totals remain exact and refresh automatically",
+    "last successful type and category are remembered, while old amount and note are never reused",
+    "invalid and unsafe amounts are blocked before creating records",
+    "failed saves keep input and cannot be duplicated by repeated clicks",
+    "record history has a separate clear view and scoped search; preview does not retain a hidden search",
+    "statistics and charts are loaded only on demand with no duplicate dashboard",
+    "today, this week and this month are one-click inclusive local-calendar queries",
+    "advanced filters collapse after applying and all conditions can be cleared in one click",
+    "saved records preserve applied statistics while unapplied draft edits stay separate",
+    "existing charts, exact budget calculations and warnings still work in the simpler interface",
+    "one-click full backup and secondary CSV export still download actual files",
+    "short in-app instructions open and close with standard keyboard behavior",
+    "native radio labels, keyboard focus and skip navigation remain accessible",
+    "320/375/768/1280/1440px layouts have no page overflow and maintain touch-size targets",
+    "home preview stays at five items, with a single click to see the loaded history",
+    "all live interface interactions finish without uncaught errors or missing scripts",
+    "updated interface preserves real-file persistence across restart",
+    "final keyboard skip navigation and clean desktop/mobile/statistics visual inspection"
+  ],
+  "browser": "156.0.8078.80",
+  "date": "2026-11-07T08:27:42.805Z",
+  "video": "ui-demo.webm",
+  "launcher": {
+    "automaticPort": true,
+    "reusesExistingProcess": true,
+    "separateDemo": true,
+    "stopVerified": true
+  }
+}

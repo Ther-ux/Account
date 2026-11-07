@@ -58,7 +58,10 @@ export function initStats(container) {
   wrapper.className = "stats-view";
   // Static template; user-provided strings are only assigned through DOM properties.
   wrapper.innerHTML = `
-    <form class="stats-filter" novalidate aria-label="收支统计筛选">
+    <div class="stats-controls"><div class="stats-periods" role="group" aria-label="快捷时间范围">
+      <button type="button" data-period="all" aria-pressed="true">全部时间</button><button type="button" data-period="today" aria-pressed="false">今天</button><button type="button" data-period="week" aria-pressed="false">本周</button><button type="button" data-period="month" aria-pressed="false">本月</button>
+    </div><button type="button" class="stats-clear-quick" hidden>清空</button><button type="button" class="stats-advanced-toggle" aria-expanded="false" aria-controls="${prefix}-advanced">更多筛选<span class="stats-filter-count"></span></button></div>
+    <div class="stats-advanced" id="${prefix}-advanced" hidden><form class="stats-filter" novalidate aria-label="收支统计筛选">
       <div class="stats-field"><label for="${prefix}-from">起始日期</label>
         <input id="${prefix}-from" name="from" type="date"></div>
       <div class="stats-field"><label for="${prefix}-to">结束日期</label>
@@ -74,7 +77,7 @@ export function initStats(container) {
       <div class="stats-actions"><button type="submit" class="stats-query">查询统计</button>
         <button type="reset" class="stats-reset">清空筛选</button></div>
       <p id="${prefix}-hint" class="stats-hint">筛选可留空；日期与金额范围均包含端点。</p>
-    </form>
+    </form></div>
     <p class="stats-feedback" role="status" aria-live="polite"></p>
     <button type="button" class="stats-retry" hidden>重试当前查询</button>
     <div class="stats-summary" aria-label="收支统计结果">
@@ -89,6 +92,13 @@ export function initStats(container) {
     <p class="stats-empty" hidden></p>`;
   container.replaceChildren(wrapper);
   const form = wrapper.querySelector("form");
+  const advanced = wrapper.querySelector(".stats-advanced");
+  const advancedToggle = wrapper.querySelector(".stats-advanced-toggle");
+  const filterCount = wrapper.querySelector(".stats-filter-count");
+  advancedToggle.addEventListener("click", () => {
+    advanced.hidden = !advanced.hidden;
+    advancedToggle.setAttribute("aria-expanded", String(!advanced.hidden));
+  });
   const fromInput = form.elements.namedItem("from");
   const toInput = form.elements.namedItem("to");
   const categoryInput = form.elements.namedItem("category");
@@ -113,6 +123,42 @@ export function initStats(container) {
   let activeRequest = null;
   let destroyed = false;
 
+  function localDate(date) {
+    return [date.getFullYear(), String(date.getMonth()+1).padStart(2,"0"), String(date.getDate()).padStart(2,"0")].join("-");
+  }
+  function periodDates(period) {
+    const today = new Date();
+    if (period === "today") return {from:localDate(today),to:localDate(today)};
+    if (period === "week") {
+      const monday=new Date(today);monday.setDate(today.getDate()-((today.getDay()+6)%7));
+      const sunday=new Date(monday);sunday.setDate(monday.getDate()+6);
+      return {from:localDate(monday),to:localDate(sunday)};
+    }
+    if (period === "month") return {from:localDate(new Date(today.getFullYear(),today.getMonth(),1)),to:localDate(new Date(today.getFullYear(),today.getMonth()+1,0))};
+    return {};
+  }
+  function syncControls() {
+    for(const button of wrapper.querySelectorAll("[data-period]")) {
+      const expected=periodDates(button.dataset.period);
+      button.setAttribute("aria-pressed",String((appliedFilters.from??"")===(expected.from??"")&&(appliedFilters.to??"")===(expected.to??"")));
+    }
+    const count=["category","minCents","maxCents"].filter(key=>appliedFilters[key]!==undefined).length;
+    filterCount.textContent=count?" · "+count+" 项":"";
+    wrapper.querySelector(".stats-clear-quick").hidden=Object.keys(appliedFilters).length===0;
+  }
+  function writeFilters() {
+    fromInput.value=appliedFilters.from??"";toInput.value=appliedFilters.to??"";
+    categoryInput.value=appliedFilters.category??"";
+    minInput.value=appliedFilters.minCents===undefined?"":statsFormatCents(appliedFilters.minCents);
+    maxInput.value=appliedFilters.maxCents===undefined?"":statsFormatCents(appliedFilters.maxCents);
+    for(const input of [fromInput,toInput,categoryInput,minInput,maxInput]) input.removeAttribute("aria-invalid");
+  }
+  for(const button of wrapper.querySelectorAll("[data-period]")) button.addEventListener("click",()=>{
+    const dates=periodDates(button.dataset.period);
+    delete appliedFilters.from;delete appliedFilters.to;
+    appliedFilters={...appliedFilters,...dates};
+    writeFilters();syncControls();void load();
+  });
   function show(message, state) {
     feedback.textContent = message;
     feedback.dataset.state = state;
@@ -179,6 +225,7 @@ export function initStats(container) {
       empty.hidden = checked.incomeCents !== 0 || checked.expenseCents !== 0;
       empty.textContent = Object.keys(filters).length ? "没有匹配这些条件的收支记录。" : "还没有收支记录，记一笔后会自动更新。";
       show("统计已更新。", "success");
+      window.dispatchEvent(new CustomEvent("ledger:stats-updated", {detail: {filters: {...filters}}}));
     } catch (error) {
       if (destroyed || current !== requestSequence || error.name === "AbortError") return;
       summary.dataset.stale = "true";
@@ -187,6 +234,7 @@ export function initStats(container) {
       show((error instanceof TypeError ? "网络连接失败，请检查服务。" : error.message) +
         (displayedFilters ? " 当前保留上次查询结果。" : " 尚未取得有效结果。"), "error");
       retryButton.hidden = false;
+      window.dispatchEvent(new Event("ledger:stats-error"));
     } finally {
       if (!destroyed && current === requestSequence) {
         wrapper.removeAttribute("aria-busy");
@@ -201,6 +249,8 @@ export function initStats(container) {
       const filters = readFilters();
       // Only explicit, validated queries change applied filters; typing a draft does not.
       appliedFilters = filters;
+      syncControls();
+      advanced.hidden = true; advancedToggle.setAttribute("aria-expanded","false");
       void load();
     } catch (error) {
       ++requestSequence;
@@ -210,17 +260,21 @@ export function initStats(container) {
       queryButton.textContent = "查询统计";
       retryButton.hidden = true;
       show(error.message, "error");
+      advanced.hidden = false; advancedToggle.setAttribute("aria-expanded","true");
       error.input?.focus();
     }
   }
   function reset() {
     appliedFilters = {};
+    syncControls();
+    advanced.hidden = true; advancedToggle.setAttribute("aria-expanded","false");
     for (const input of [fromInput, toInput, categoryInput, minInput, maxInput]) input.removeAttribute("aria-invalid");
     void load();
   }
   const onChanged = () => { void load(); };
   form.addEventListener("submit", submit);
   form.addEventListener("reset", reset);
+  wrapper.querySelector(".stats-clear-quick").addEventListener("click",()=>form.reset());
   retryButton.addEventListener("click", onChanged);
   window.addEventListener("ledger:changed", onChanged);
   const controller = {
@@ -238,4 +292,3 @@ export function initStats(container) {
   void load();
   return controller;
 }
-

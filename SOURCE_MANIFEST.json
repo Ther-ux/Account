@@ -1,0 +1,171 @@
+{
+  "version": "1.1.0",
+  "go_test_cases": 222,
+  "ui_checks": 20,
+  "launcher_verified": {
+    "automaticPort": true,
+    "reusesExistingProcess": true,
+    "separateDemo": true,
+    "stopVerified": true
+  },
+  "browser": "156.0.8078.80",
+  "inputs": [
+    {
+      "archive": "member02_提交包_2026-11-07(1).zip",
+      "file": "internal/store/json.go",
+      "source_sha256": "66eb5d7f25a6151cbb14a2c36b39aaf27534d8ceafdb219f49bf7e961fd66423",
+      "integrated_sha256": "8b3eee07edc04f39754e392cd47fbc2e6f87a41c645e001c32b671ae48214611",
+      "changed_during_integration": true
+    },
+    {
+      "archive": "member02_提交包_2026-11-07(1).zip",
+      "file": "internal/store/json_test.go",
+      "source_sha256": "88d6da49e4b18c9b8d7784f9299989d1cc8297fb76e3778b87857c66c8d2c783",
+      "integrated_sha256": "88d6da49e4b18c9b8d7784f9299989d1cc8297fb76e3778b87857c66c8d2c783",
+      "changed_during_integration": false
+    },
+    {
+      "archive": "member03_提交包_2026-11-07(1).zip",
+      "file": "internal/httpapi/create.go",
+      "source_sha256": "93f8c3ca7d56be05139ac680bb6b27712492af183f3639e06b6c9c9ae8be44f9",
+      "integrated_sha256": "1cab69d54100211918d7228dc9c1d035ca55e9cba6f4b0f4e77ec8921dde700b",
+      "changed_during_integration": true
+    },
+    {
+      "archive": "member03_提交包_2026-11-07(1).zip",
+      "file": "internal/httpapi/create_test.go",
+      "source_sha256": "94be44a08eaa194fcd1aa1e2a2dc6dd41d8977d3f1e1fd8d446d9f35fa675b89",
+      "integrated_sha256": "350fea67465add41ff0a1259b5706f33b07a3cffcdd788c2d116801d88fe4776",
+      "changed_during_integration": true
+    },
+    {
+      "archive": "任务4_交接包(1).zip",
+      "file": "internal/httpapi/recent.go",
+      "source_sha256": "854d97b6c862e5ed328ca152f57b69141081f6272230e4730775ee75ec219482",
+      "integrated_sha256": "d2c11e599938efcf490b9f71d9bf1932d641db374fe6560c5501ccaefe0e348b",
+      "changed_during_integration": true
+    },
+    {
+      "archive": "任务4_交接包(1).zip",
+      "file": "internal/httpapi/recent_test.go",
+      "source_sha256": "a2568a52bdca0aab6aa5a41575b4478f27dfd60ecdd6dca51f2dd870b1b3bbe4",
+      "integrated_sha256": "a2568a52bdca0aab6aa5a41575b4478f27dfd60ecdd6dca51f2dd870b1b3bbe4",
+      "changed_during_integration": false
+    },
+    {
+      "archive": "成员05_收支统计API_代码.zip",
+      "file": "internal/httpapi/stats.go",
+      "source_sha256": "44e338a47d5642ed469e816640c2e424f28f67aaacaddc3d2b208c8d77ae9fd6",
+      "integrated_sha256": "98bc2afb56b5b21937ab0253e49d77593111f2b1d9c43d134abe756fc660ef86",
+      "changed_during_integration": true
+    },
+    {
+      "archive": "成员05_收支统计API_代码.zip",
+      "file": "internal/httpapi/stats_test.go",
+      "source_sha256": "e5d4bd442a275245265a3f3f50fc3fa0c4f8b256919880eb3c5b347c82b3c931",
+      "integrated_sha256": "e5d4bd442a275245265a3f3f50fc3fa0c4f8b256919880eb3c5b347c82b3c931",
+      "changed_during_integration": false
+    },
+    {
+      "archive": "成员06_记账表单_代码.zip",
+      "file": "web/record.js",
+      "source_sha256": "d56b044f11f46c6488ffbd14e04e17bea61a96e8df1dee5ac00268f854e5d322",
+      "integrated_sha256": "66cd7104e76962174ee104bca569f0467d5d5be90e4f5d7ed2d5fb4bac5758ed",
+      "changed_during_integration": true
+    },
+    {
+      "archive": "成员07_最近记录界面_代码.zip",
+      "file": "web/recent.js",
+      "source_sha256": "37a2a7bb492e83405546fe32b05a32f6491a731ed7b3fe0e2d7a6f34934df9a3",
+      "integrated_sha256": "244fc3f999e563a39cc3832abd4f6a0788acb8bb022323f0a19a26d171d8fc72",
+      "changed_during_integration": true
+    },
+    {
+      "archive": "成员08_统计筛选界面_代码.zip",
+      "file": "web/stats.js",
+      "source_sha256": "f63ff2a26546a66ad5d9dc7591cedf8f41faab9ef41b133b430eba39a43f4c89",
+      "integrated_sha256": "32250381a8ea33daa9434602b12d686391c7a0fe44b5f8a8bdaaa426f658d0be",
+      "changed_during_integration": true
+    },
+    {
+      "archive": "成员09_页面框架与导航_代码.zip",
+      "file": "web/index.html",
+      "source_sha256": "776115fe350972417faac199a34ed38a5f5c77c4ba898a45abec5dc880084a7d",
+      "integrated_sha256": "94fe20bde51ec4921c8b223f8e66a28cd5cea3cd7444cb4109bccf3c8aebd219",
+      "changed_during_integration": true
+    },
+    {
+      "archive": "成员09_页面框架与导航_代码.zip",
+      "file": "web/app.css",
+      "source_sha256": "7d4190b6d874ebd31495658d1d11122e7c056f2987a3245f119675972b35145c",
+      "integrated_sha256": "8d0c92971a3b9b613d2419a827cfd41851d5e2be103a1943be4620bb4a61cf16",
+      "changed_during_integration": true
+    },
+    {
+      "archive": "成员09_页面框架与导航_代码.zip",
+      "file": "web/app.js",
+      "source_sha256": "d5e97fa168c19b85684bb89579760fec83244c136945c656697b430d460ad3a6",
+      "integrated_sha256": "836c81c8afb6eb0827aaafdb6819e6697aa4568c16fe3d4b11e0780dc7f6dd0b",
+      "changed_during_integration": true
+    },
+    {
+      "archive": "member01_提交包_2026-11-07.zip",
+      "file": "internal/ledger/record.go",
+      "source_sha256": "65de6c8d829ca42a91317aed8a9d7628c45ca7e870ea7f1af24095592421fa60",
+      "integrated_sha256": "438c5eb50c0957031b1a19571912e22d5ac76dd71509b6783f1141ee77a3b580",
+      "changed_during_integration": true
+    },
+    {
+      "archive": "member01_提交包_2026-11-07.zip",
+      "file": "internal/ledger/record_test.go",
+      "source_sha256": "1214bdd0c23e9514f419732d2f102889459d2e59e9279f035600c4248f8eacd1",
+      "integrated_sha256": "7896f2122efc7938ea11fe3a6ad1b98c3f131acece04045ca6a5c8bafc887ca4",
+      "changed_during_integration": true
+    }
+  ],
+  "exe_sha256": "d818532164c9cefa911464456683c8221585db46cbfaf8927a430eb1a8632875",
+  "files": {
+    ".github/workflows/ci.yml": "a370c6a1898d19497c720dad8ec2d32b1eff2ed3529b58acb16a44ffdec6257d",
+    ".gitignore": "4aa22578073d6f3c185a08d286cd63c7892924c9e4a7a0569381ad2818806d25",
+    "cmd/ledger/main.go": "fbe30d652c2d78bf637a60c9de8654feb14a9b76d915ec716b5e059ea2c2285c",
+    "cmd/ledger/main_test.go": "59e961a74d96cf58ffb60f23fe15e0159cf7a50da46b5c2d7894eb3002fd54e3",
+    "demo.bat": "499c7734d8057d7ab4d0b928918e4dd3373e0b10ac9d14635c0860e7a7ab3491",
+    "go.mod": "d4946732a28dbfdba332e2416184b04019030208dfbd4ecb9037ca9778ad74b1",
+    "INTEGRATION.md": "de9fb6a92c3cf685b7607d031de986b380cbf1dc9c8fd330cbe186435043ee6c",
+    "internal/httpapi/create.go": "1cab69d54100211918d7228dc9c1d035ca55e9cba6f4b0f4e77ec8921dde700b",
+    "internal/httpapi/create_test.go": "350fea67465add41ff0a1259b5706f33b07a3cffcdd788c2d116801d88fe4776",
+    "internal/httpapi/enhancements_test.go": "a8abe411323e3cec8654f7c075ec999b44eb262fc3e124b4a6075eff56d7e1d3",
+    "internal/httpapi/export.go": "938b54ed762997b56c07614034672f1cdea8f5c6ddb84ab5bb163c44b6071ae2",
+    "internal/httpapi/insights.go": "09cd6b7c0d7c08b6f07cdb3f46bbaa593fd05f7ab2b7449e8889037eb3f851dd",
+    "internal/httpapi/recent.go": "d2c11e599938efcf490b9f71d9bf1932d641db374fe6560c5501ccaefe0e348b",
+    "internal/httpapi/recent_test.go": "a2568a52bdca0aab6aa5a41575b4478f27dfd60ecdd6dca51f2dd870b1b3bbe4",
+    "internal/httpapi/stats.go": "98bc2afb56b5b21937ab0253e49d77593111f2b1d9c43d134abe756fc660ef86",
+    "internal/httpapi/stats_test.go": "e5d4bd442a275245265a3f3f50fc3fa0c4f8b256919880eb3c5b347c82b3c931",
+    "internal/ledger/record.go": "438c5eb50c0957031b1a19571912e22d5ac76dd71509b6783f1141ee77a3b580",
+    "internal/ledger/record_test.go": "7896f2122efc7938ea11fe3a6ad1b98c3f131acece04045ca6a5c8bafc887ca4",
+    "internal/store/integrity_test.go": "86fbd1d3f5735502b2d89b4f88ad1a6e0f34b3d18b7ca681fb77893cdf3c876a",
+    "internal/store/json.go": "8b3eee07edc04f39754e392cd47fbc2e6f87a41c645e001c32b671ae48214611",
+    "internal/store/json_test.go": "88d6da49e4b18c9b8d7784f9299989d1cc8297fb76e3778b87857c66c8d2c783",
+    "launch.ps1": "21ec6d77e3d632b3d8c3c5891c870681c9265a472e42f5749350f2a44913c429",
+    "media/demo.webm": "db0c5ef70335cef1dd0fc995e29097c527364a47d2a134c9e46fd18cf8d5cb0b",
+    "media/desktop.png": "ca8b9967dd420552f535dcb04a56750aad408cfd757741a301ec1bee13ee77dd",
+    "media/mobile.png": "499d4c968d4a6a0df5d7c95130798574912cdcc1119047e8663d2773a7bcedfb",
+    "media/statistics.png": "6bfb736a7dc8ff49bbb4a322933b4eb691400c421dbff5b0e095bc6f7b53af9a",
+    "README.md": "bf420b0eb9c87951006a9d2b2e619b9166e344f6f38f5839156814fe55f448e3",
+    "RELEASE_NOTES.md": "ce4c2bb85747f161a918df8067110b7c25a554b520d44f2be95b9d500ffacb85",
+    "start.bat": "7cda66847c543eebe9c66e505a37a48e6fa38dafe3b829c54a1a5ee19fe2813e",
+    "stop.bat": "78a9f5326c7178bd2b33cd25d95411ab4fac2bfb0d445721c1f3b30725e7d194",
+    "TEAM_BLOG_DRAFT.md": "e8d0fb3b24bd4e710001a4cb048c9457ef2c04ffcbf5db343ac807239eaa1a75",
+    "VALIDATION.md": "37e53888e6fab2dfd487431f4dda6272ecdf792ff5cf754e4cf1e3c06bde14fe",
+    "verification/browser-results.json": "29427dba11f71b37acbd48abd37582ae73ca0aec5cc850a1b0d879b17a86ebd6",
+    "verification/go-tests.jsonl": "35e9a8bd2a67871c106b57befe6329c4307f73059514c700e4a78f48a8ce7532",
+    "web/app.css": "8d0c92971a3b9b613d2419a827cfd41851d5e2be103a1943be4620bb4a61cf16",
+    "web/app.js": "836c81c8afb6eb0827aaafdb6819e6697aa4568c16fe3d4b11e0780dc7f6dd0b",
+    "web/assets.go": "bc90f75fba85756a4887e8aaeaddd8ab1b652c7f9186821205c672a9eaca4bf8",
+    "web/index.html": "94fe20bde51ec4921c8b223f8e66a28cd5cea3cd7444cb4109bccf3c8aebd219",
+    "web/insights.js": "20261fd3617f727103f34ad025ff3a4be1ae14d648dc2e62eb07e3ceca0c96dd",
+    "web/recent.js": "244fc3f999e563a39cc3832abd4f6a0788acb8bb022323f0a19a26d171d8fc72",
+    "web/record.js": "66cd7104e76962174ee104bca569f0467d5d5be90e4f5d7ed2d5fb4bac5758ed",
+    "web/stats.js": "32250381a8ea33daa9434602b12d686391c7a0fe44b5f8a8bdaaa426f658d0be"
+  }
+}

@@ -1,1 +1,5 @@
 /data/
+/dist/
+/.runtime/
+*.exe
+*.log

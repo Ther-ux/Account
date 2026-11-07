@@ -11,7 +11,19 @@ import (
 // Create validates a single JSON record and saves it through appendRecord.
 func Create(appendRecord func(ledger.Record) error) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			w.Header().Set("Allow", "POST")
+			createWriteError(w, 405, "请使用 POST 请求")
+			return
+		}
+		if appendRecord == nil {
+			createWriteError(w, 500, "账本保存服务未配置")
+			return
+		}
+		r.Body = http.MaxBytesReader(w, r.Body, 1<<20)
+		defer r.Body.Close()
 		decoder := json.NewDecoder(r.Body)
+		decoder.DisallowUnknownFields()
 		// A pointer distinguishes a top-level null from a record object.
 		var record *ledger.Record
 		if err := decoder.Decode(&record); err != nil {
@@ -42,7 +54,7 @@ func Create(appendRecord func(ledger.Record) error) http.HandlerFunc {
 			return
 		}
 		if err := appendRecord(*record); err != nil {
-			createWriteError(w, http.StatusInternalServerError, "保存账目失败: "+err.Error())
+			createWriteError(w, http.StatusInternalServerError, "保存账目失败，请检查磁盘空间或文件权限后重试")
 			return
 		}
 

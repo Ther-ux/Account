@@ -1,35 +1,32 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>个人记账本</title>
-</head>
-<body>
-  <header>
-    <h1>个人记账本</h1>
-    <p>项目骨架已启动，各功能由组员接入。</p>
-    <nav aria-label="记账本功能">
-      <ul>
-        <li><a href="#record">记一笔</a></li>
-        <li><a href="#recent">最近记录</a></li>
-        <li><a href="#stats">收支统计</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <section id="record" aria-labelledby="record-title">
-      <h2 id="record-title">记一笔</h2>
-      <div id="record-panel"><p>待接入记账表单。</p></div>
-    </section>
-    <section id="recent" aria-labelledby="recent-title">
-      <h2 id="recent-title">最近记录</h2>
-      <div id="recent-panel"><p>待接入最近记录列表。</p></div>
-    </section>
-    <section id="stats" aria-labelledby="stats-title">
-      <h2 id="stats-title">收支统计</h2>
-      <div id="stats-panel"><p>待接入统计筛选与结果。</p></div>
-    </section>
-  </main>
-</body>
-</html>
+<html lang="zh-CN"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light">
+  <title>个人记账本 · 轻松记好每一笔</title><link rel="icon" href="data:,"><link rel="stylesheet" href="/app.css"><script type="module" src="/app.js"></script>
+</head><body data-view="record">
+  <a class="app-skip-link" href="#main-content">跳到主要内容</a>
+  <header class="app-header"><div class="app-header-inner">
+    <a class="app-brand" href="#record"><span class="app-brand-mark" aria-hidden="true">账</span><span>个人记账本<small>简单一点，记得清楚</small></span></a>
+    <nav class="app-nav" aria-label="账本页面"><a href="#record" aria-current="page">记一笔</a><a href="#recent">看记录</a><a href="#stats">看统计</a></nav>
+    <div class="app-header-actions"><button type="button" class="app-backup" data-export="json">备份账本</button>
+      <details class="app-more"><summary aria-label="更多操作">···</summary><div class="app-more-menu"><button type="button" data-export="csv">导出表格 CSV</button><button type="button" id="app-help-open">怎么使用？</button></div></details></div>
+  </div></header>
+  <main id="main-content" class="app-main" tabindex="-1">
+    <div class="app-intro-row"><div class="app-intro"><p class="app-eyebrow"><span id="app-today"></span><span id="app-mode" class="app-mode">本机账本</span></p>
+      <h1 id="app-page-title" tabindex="-1">轻松记好每一笔。</h1><p id="app-page-description">输入金额，选个类别，一键保存就好。</p></div>
+      <p class="app-export-feedback" role="status" aria-live="polite"></p></div>
+    <p id="app-demo-notice" class="app-demo-notice" hidden>你正在体验演示账本，不会影响真实记录。</p>
+    <section class="app-overview" aria-label="全部账目概览"><div class="app-overview-grid">
+      <div class="app-metric"><span class="app-metric-label">总收入 <small>元</small></span><strong data-overview="income">—</strong><span class="app-metric-note">每一份收获，都有记录</span></div>
+      <div class="app-metric"><span class="app-metric-label">总支出 <small>元</small></span><strong data-overview="expense">—</strong><span class="app-metric-note">花在哪里，一目了然</span></div>
+      <div class="app-metric app-metric-balance"><span class="app-metric-label">当前结余 <small>元</small></span><strong data-overview="balance">—</strong><span class="app-metric-note">收入减去支出</span></div>
+    </div><p class="app-overview-feedback" role="status" aria-live="polite">正在更新账本概览…</p></section>
+    <div class="app-workspace">
+      <section id="record" class="app-section" aria-labelledby="record-title"><div class="app-section-heading"><div><h2 id="record-title">快速记账</h2><p>日常一笔，几秒就好</p></div><span class="app-section-index">01</span></div><div id="record-panel"><p class="app-loading" role="status">正在准备表单…</p></div></section>
+      <section id="recent" class="app-section" aria-labelledby="recent-title"><div class="app-section-heading"><div><h2 id="recent-title">最近记录</h2><p id="app-recent-hint">最近 5 笔，按录入顺序显示</p></div><span class="app-section-index">02</span></div><div id="recent-panel"><p class="app-loading" role="status">正在读取记录…</p></div></section>
+    </div>
+    <section id="stats" class="app-section app-statistics" aria-labelledby="stats-title" hidden><div class="app-section-heading"><div><h2 id="stats-title">收支一览</h2><p>选个时间范围，结果即刻呈现</p></div></div><div id="stats-panel"><p class="app-loading" role="status">正在获取统计结果…</p></div></section>
+    <section id="insights" class="app-section app-insights" aria-labelledby="insights-title" hidden><div class="app-section-heading"><div><h2 id="insights-title">看懂你的收支</h2><p>趋势、去向和预算，清清楚楚</p></div></div><div id="insights-panel"><p class="app-loading" role="status">正在整理图表…</p></div></section>
+    <noscript><p class="app-module-error">请启用浏览器 JavaScript 后使用。</p></noscript>
+  </main><footer class="app-footer"><span class="app-local-dot" aria-hidden="true"></span>账目保存在本机，记得定期备份。</footer>
+  <dialog class="app-help" aria-labelledby="app-help-title"><div class="app-help-content"><p class="app-eyebrow">从第一笔开始</p><h2 id="app-help-title">三步，记好一笔账。</h2><ol><li><strong>输入金额</strong><span>默认记录今天的支出，不用重复选日期。</span></li><li><strong>点选类别</strong><span>饮食、交通、购物，点一下就选好。</span></li><li><strong>点击保存</strong><span>记录和金额自动更新，无需手动刷新。</span></li></ol><p>补记旧账或添加备注，展开“日期与备注”即可。统计页支持一键查看今天、本周和本月。</p><form method="dialog"><button class="app-primary" type="submit">知道了，开始记账</button></form></div></dialog>
+</body></html>

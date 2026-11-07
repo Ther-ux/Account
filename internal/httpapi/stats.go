@@ -53,34 +53,11 @@ func Stats(listRecords func() ([]ledger.Record, error)) http.HandlerFunc {
 			statsWriteError(w, http.StatusInternalServerError, "读取账本失败，请稍后重试")
 			return
 		}
-		result := statsResult{}
-		for _, record := range records {
-			if !filters.matches(record) {
-				continue
-			}
-			if record.AmountCents <= 0 {
-				statsWriteError(w, http.StatusInternalServerError, "账本包含无效金额")
-				return
-			}
-			var total *int64
-			switch record.Type {
-			case "income":
-				total = &result.IncomeCents
-			case "expense":
-				total = &result.ExpenseCents
-			default:
-				statsWriteError(w, http.StatusInternalServerError, "账本包含无效收支类型")
-				return
-			}
-			// Both totals stay nonnegative. Checking before addition prevents wraparound.
-			if *total > math.MaxInt64-record.AmountCents {
-				statsWriteError(w, http.StatusInternalServerError, "统计金额超出可计算范围")
-				return
-			}
-			*total += record.AmountCents
+		result, err := statsCompute(records, filters)
+		if err != nil {
+			statsWriteError(w, 500, err.Error())
+			return
 		}
-		// Difference of two nonnegative int64 totals is also representable.
-		result.BalanceCents = result.IncomeCents - result.ExpenseCents
 		w.WriteHeader(http.StatusOK)
 		_ = json.NewEncoder(w).Encode(result)
 	}
@@ -99,7 +76,7 @@ func statsParseFilters(values url.Values) (statsFilters, error) {
 			continue
 		}
 		parsed, err := time.Parse("2006-01-02", date)
-		if err != nil || parsed.Format("2006-01-02") != date {
+		if err != nil || parsed.Year() < 1 || parsed.Format("2006-01-02") != date {
 			return filters, errors.New("日期必须为真实有效的 YYYY-MM-DD")
 		}
 	}
@@ -158,4 +135,31 @@ func (filters statsFilters) matches(record ledger.Record) bool {
 func statsWriteError(w http.ResponseWriter, status int, message string) {
 	w.WriteHeader(status)
 	_ = json.NewEncoder(w).Encode(map[string]string{"error": message})
+}
+
+func statsCompute(records []ledger.Record, filters statsFilters) (statsResult, error) {
+	result := statsResult{}
+	for _, record := range records {
+		if !filters.matches(record) {
+			continue
+		}
+		if record.AmountCents <= 0 {
+			return statsResult{}, errors.New("账本包含无效金额")
+		}
+		var total *int64
+		switch record.Type {
+		case "income":
+			total = &result.IncomeCents
+		case "expense":
+			total = &result.ExpenseCents
+		default:
+			return statsResult{}, errors.New("账本包含无效收支类型")
+		}
+		if *total > math.MaxInt64-record.AmountCents {
+			return statsResult{}, errors.New("统计金额超出可计算范围")
+		}
+		*total += record.AmountCents
+	}
+	result.BalanceCents = result.IncomeCents - result.ExpenseCents
+	return result, nil
 }

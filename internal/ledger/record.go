@@ -21,7 +21,7 @@ type Record struct {
 func Validate(record Record) error {
 	date, err := time.Parse(time.DateOnly, record.Date)
 	// Parse checks the calendar; the round trip also enforces zero padding.
-	if err != nil || date.Format(time.DateOnly) != record.Date {
+	if err != nil || date.Year() < 1 || date.Format(time.DateOnly) != record.Date {
 		return errors.New("date 必须为真实的 YYYY-MM-DD 日期")
 	}
 	if record.AmountCents <= 0 {

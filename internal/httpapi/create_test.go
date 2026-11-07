@@ -172,8 +172,8 @@ func TestCreateAppendFailure(t *testing.T) {
 	if calls != 1 {
 		t.Fatalf("append calls = %d, want 1", calls)
 	}
-	if message := createCheckError(t, rr, http.StatusInternalServerError); !strings.Contains(message, "disk full") {
-		t.Errorf("error = %q, want storage failure reason", message)
+	if message := createCheckError(t, rr, http.StatusInternalServerError); strings.Contains(message, "disk full") || !strings.Contains(message, "保存") {
+		t.Errorf("error = %q, want readable error without raw storage details", message)
 	}
 }
 

@@ -49,6 +49,7 @@ func TestValidateDates(t *testing.T) {
 		{"2026-01-01", true},
 		{"2026-12-31", true},
 		{"0001-01-01", true},
+		{"0000-01-01", false},
 		{"9999-12-31", true},
 		{"", false},
 		{"2026-02-29", false},
